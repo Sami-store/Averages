@@ -1,0 +1,93 @@
+/**
+ * File name: AverageWithMethods
+ * Short description: Prints average value of a sequence of numbers
+ * @author Samuel Melenciuc
+ * details of the revision: none
+ */
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) { //Main method
+        getDescription(); //Calling method
+        String userNum = getNumbers(); //Calling method
+        double avg = getAverage(userNum); //Calling method using user input
+        printResult(userNum, avg); //Calling method to print
+    }
+
+    //This method prints a message to the user
+    public static void getDescription(){
+        System.out.println("Please enter five to ten numbers, all on one line, and separated by spaces.");
+    }
+
+    //This method reads numbers from the user
+    public static String getNumbers(){
+        Scanner input = new Scanner(System.in);
+        return input.nextLine();
+    }
+
+    //This method calculates average numbers from the user
+    public static Double getAverage(String inputString) {
+        Scanner in = new Scanner(inputString);
+        int count = 0;
+
+        //Using while loop to check how many numbers are being entered
+        while (in.hasNext()) {
+            if (in.hasNextDouble()) {
+                count++;
+                in.nextDouble();
+            } else {
+                in.next();
+            }
+        }
+
+        //Using if statement to check if user entered between 5 and 10 numbers
+        if (count < 5 || count > 10) {
+            System.out.println("Error: Input must contain 5 to 10 numbers.");
+            return null;
+        }
+
+        Scanner strInput = new Scanner(inputString);
+        double sum = 0;
+        count = 0;
+
+        //Using while loop to add each number into sum and increase count
+        while (strInput.hasNextDouble()) {
+            sum += strInput.nextDouble();
+            count++;
+        }
+
+        //Using if statement to find the average
+        double average = 0;
+        if (count > 0){
+            average = sum / count;
+        }
+        return average;
+        }
+
+    //This method will print all the input numbers and the average value
+    public static void printResult(String userNum, double avg){
+        System.out.printf("The average of the numbers %s is %.2f.\n", userNum, avg);
+    }
+
+}
+
+/** Test output 1
+ * Please enter five to ten numbers, all on one line, and separated by spaces.
+ * 1 2 3 4 5 100
+ * The average of the numbers 1 2 3 4 5 100 is 19.17.
+ *
+ * Test output 2
+ * Please enter five to ten numbers, all on one line, and separated by spaces.
+ * 1 23
+ * Error: Input must contain 5 to 10 numbers.
+ *
+ *Test output 3
+ * Please enter five to ten numbers, all on one line, and separated by spaces.
+ * 3 2 3 4 4 3 2 4 45 5 3 2 21 4 3 2 3
+ * Error: Input must contain 5 to 10 numbers.
+ *
+ * Test output 4
+ * Please enter five to ten numbers, all on one line, and separated by spaces.
+ * 20 40 60 80 100
+ * The average of the numbers 20 40 60 80 100 is 60.00.
+ */
